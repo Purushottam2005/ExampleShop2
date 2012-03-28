@@ -7,10 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import classes.Artikelgruppe;
 
+
+/**
+ * 
+ * @author andreas
+ * 
+ * entity-class Artikel is pojo. connected onetomany with artikelgruppe
+ *
+ */
 @SuppressWarnings("serial")
-@Entity
-public class Artikel implements java.io.Serializable {
+@Entity(name="Artikel")
+public class Artikel  implements java.io.Serializable{
 	@Id
 	@GeneratedValue
 	private int id;

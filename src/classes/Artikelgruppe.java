@@ -4,17 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.Set;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+import classes.Artikel;
+/**
+ * 
+ * @author andreas monschau
+ * 
+ * entity class artikelgruppe is pojo except for function artikelhinzu which is used for safe saving of artikel and artikelgruppen 
+ *
+ */
+
+
+@SuppressWarnings("serial")
+@Entity(name="Artikelgruppe")
 public class Artikelgruppe implements java.io.Serializable{
+
 	@Id
 	@GeneratedValue
 	private int id;
 	private String bezeichnung;
 	private String info;
 	@OneToMany(mappedBy="artikelgruppe", cascade={CascadeType.ALL})
-	private Set<Artikel> artikel;
+	private List<Artikel> artikel;
 	public int getId() {
 		return id;
 	}
@@ -33,10 +46,18 @@ public class Artikelgruppe implements java.io.Serializable{
 	public void setInfo(String info) {
 		this.info = info;
 	}
-	public Set<Artikel> getArtikel() {
+	public List<Artikel> getArtikel() {
 		return artikel;
 	}
-	public void setArtikel(Set<Artikel> artikel) {
+	public void setArtikel(List<Artikel> artikel) {
 		this.artikel = artikel;
+	}
+	
+	public void artikelhinzu(Artikel art){
+		if(artikel == null){
+			artikel = new ArrayList<Artikel>();
+		}
+		artikel.add(art);
+		art.setArtikelgruppe(this);
 	}
 }

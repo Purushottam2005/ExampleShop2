@@ -2,15 +2,21 @@ package DAO;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import interfaces.GenericDAO;
 
-
+/**
+ * 
+ * 
+ * @author andreas
+ * 
+ * stateful session bean implementation of the remote genericdao-interface
+ *
+ */
 @Stateful(name="GenericDAO")
 public class GenericDAOImpl implements GenericDAO {
 	@PersistenceContext EntityManager em;
