@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import interfaces.ArtikelgruppenDAO;
 import interfaces.GenericDAO;
+import interfaces.KundeDAO;
 import interfaces.Warenkorb;
 import interfaces.WarenkorbDAO;
 
@@ -79,17 +81,9 @@ public class TestGenericDAO {
 		dao.save(grp2);		
 	}
 	@Test
-	public void TestKunden(){
-		Kunde k1 = new Kunde();
-		k1.setAdresse("Professor Neu Alle 3 53225 Bonn");
-		k1.setEmail("andreas@diemonschaus.de");
-		k1.setPassword("test");
-		k1.setVorname("andreas");
-		dao.save(k1);
-	}
-	@Test
-	public void TestWarenkorb(){
-		//no dbaccess here
+	public void TestWarenkorb() throws NamingException{
+		//ArtikelgruppenDAO erzeugen
+		ArtikelgruppenDAO grpDAO = (ArtikelgruppenDAO)context.lookup("ArtikelgruppenDAOImpl/remote");
 		//Artikelgruppen erzeugen
 		Artikelgruppe grp3 = new Artikelgruppe();
 		grp3.setBezeichnung("Gruppe 3");
@@ -99,22 +93,20 @@ public class TestGenericDAO {
 		art4.setImg_url("leer");
 		art4.setInfo("Dies ist Artikel 3");
 		art4.setVk_brutto(23.00);
-		dao.save(grp3);
+		grpDAO.save(grp3);
+		//Kundedao erzeugen
+		KundeDAO kdao = (KundeDAO)context.lookup("KundeDAOImpl/remote");
+		
 		//Kunde erzeugen
 		Kunde k2 = new Kunde();
 		k2.setAdresse("Schützenstrasse 4 53474 Ahrweiler");
 		k2.setEmail("tirza@diemonschaus.de");
 		k2.setPassword("test");
 		k2.setVorname("tirza");
-		dao.save(k2);
+		kdao.save(k2);
 		//Warenkorb erzeugen
-		WarenkorbDAO wk = new WarenkorbDAOImpl();
-		try {
-			wk.erstelleWarenkorb();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WarenkorbDAO wk = (WarenkorbDAO)context.lookup("WarenkorbDAOImpl/remote");
+		wk.erstelleWarenkorb();
 		wk.fuegeWarenkorbZuKunde(k2);
 		wk.legeInWarenkorb(art4);
 		wk.geheZurKasse();

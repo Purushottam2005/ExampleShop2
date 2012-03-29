@@ -18,16 +18,18 @@ import interfaces.WarenkorbDAO;
  * should not be any direct actions between user and class
  *
  */
-@Stateful(name="WarenkorbDAO")
+@Stateful(name="WarenkorbDAOImpl")
 public class WarenkorbDAOImpl implements WarenkorbDAO {
 	InitialContext context = null;
 	Warenkorb wk = new WarenkorbImpl();
 
 	@Override
 	public void legeInWarenkorb(Artikel artikel) {
+
 		if(wk!=null){
-			wk.getArtikel().add(artikel);
+			wk.artikelhinzu(artikel);
 		}
+		
 
 	}
 

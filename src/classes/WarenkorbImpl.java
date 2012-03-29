@@ -27,5 +27,12 @@ public class WarenkorbImpl implements Warenkorb{
 	public List<Artikel> getArtikel(){
 		return this.artikel;
 	}
+	@Override
+	public void artikelhinzu(Artikel art) {
+		if(artikel == null){
+			artikel = new ArrayList<Artikel>();
+		}
+		artikel.add(art);		
+	}
 
 }

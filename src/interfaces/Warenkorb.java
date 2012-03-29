@@ -12,4 +12,5 @@ public interface Warenkorb {
 	public Kunde getKunde();
 	public void setKunde(Kunde kunde);
 	public List<Artikel> getArtikel();
+	public void artikelhinzu(Artikel art);
 }
