@@ -96,13 +96,11 @@ public class TestGenericDAO {
 		art4.setVk_brutto(23.00);
 		grp3.artikelhinzu(art4);
 		grpDAO.save(grp3);
-		//Artikelgruppe Testen (mit fixer id 3)
-		
+		//Artikelgruppedao Testen (mit fixer id 3)		
 		assertTrue(grpDAO.getAlleArtikelByGrp(3).size()>0);
-		
+		assertTrue(grpDAO.getAlleArtGrp().size()>0);
 		//Kundedao erzeugen
-		KundeDAO kdao = (KundeDAO)context.lookup("KundeDAOImpl/remote");
-		
+		KundeDAO kdao = (KundeDAO)context.lookup("KundeDAOImpl/remote");		
 		//Kunde erzeugen
 		Kunde k2 = new Kunde();
 		k2.setAdresse("Schützenstrasse 4 53474 Ahrweiler");
@@ -110,6 +108,12 @@ public class TestGenericDAO {
 		k2.setPassword("test");
 		k2.setVorname("tirza");
 		kdao.save(k2);
+		//Kundendao testen
+		assertTrue(kdao.checkPassword("tirza@diemonschaus.de", "test"));
+		assertFalse(kdao.checkPassword("blub", "blab"));
+		Kunde kunde = new Kunde();
+		kunde = kdao.getKundeByEmailPasswort("tirza@diemonschaus.de", "test");
+		assertTrue(kunde.getVorname().equals("tirza"));
 		//Warenkorb erzeugen
 		WarenkorbDAO wk = (WarenkorbDAO)context.lookup("WarenkorbDAOImpl/remote");
 		wk.erstelleWarenkorb();

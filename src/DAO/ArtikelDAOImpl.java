@@ -10,16 +10,16 @@ import interfaces.ArtikelDAO;
 @Stateful(name="ArtikelDAOImpl")
 public class ArtikelDAOImpl extends GenericDAOImpl implements ArtikelDAO {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikel> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("Select a from Artikel a").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikel> getByGrp(Artikelgruppe artikelgruppe) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, artikelgruppe.getId()).getResultList();
 	}
 
 }

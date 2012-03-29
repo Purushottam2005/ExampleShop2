@@ -8,4 +8,5 @@ import classes.Kunde;
 public interface KundeDAO extends GenericDAO {
 	public boolean checkPassword(String email, String password);
 	public Kunde getKundeByEmailPasswort(String email, String password);
+	public void save(Kunde k);
 }

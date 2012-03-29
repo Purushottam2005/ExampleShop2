@@ -11,10 +11,10 @@ import interfaces.ArtikelgruppenDAO;
 public class ArtikelgruppenDAOImpl extends GenericDAOImpl implements
 		ArtikelgruppenDAO {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikelgruppe> getAlleArtGrp() {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("Select a from Artikelgruppe a").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
