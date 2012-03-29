@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import classes.Artikelgruppe;
 
@@ -27,7 +28,6 @@ public class Artikel  implements java.io.Serializable{
 	private String info;
 	private double vk_brutto;
 	private String img_url;
-	private Artikelgruppe artikelgruppe;
 	
 	public int getId() {
 		return id;
@@ -62,12 +62,6 @@ public class Artikel  implements java.io.Serializable{
 	public void setImg_url(String img_url) {
 		this.img_url = img_url;
 	}
-	@ManyToOne
-	public Artikelgruppe getArtikelgruppe() {
-		return artikelgruppe;
-	}
-	public void setArtikelgruppe(Artikelgruppe artikelgruppe) {
-		this.artikelgruppe = artikelgruppe;
-	}
+
 	
 }

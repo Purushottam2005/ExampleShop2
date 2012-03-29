@@ -12,6 +12,7 @@ import interfaces.WarenkorbDAO;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.validation.constraints.AssertTrue;
 
 
 import org.hibernate.cfg.Configuration;
@@ -91,9 +92,14 @@ public class TestGenericDAO {
 		Artikel art4 = new Artikel();
 		art4.setBezeichnung("Artikel 4");
 		art4.setImg_url("leer");
-		art4.setInfo("Dies ist Artikel 3");
+		art4.setInfo("Dies ist Artikel 4");
 		art4.setVk_brutto(23.00);
+		grp3.artikelhinzu(art4);
 		grpDAO.save(grp3);
+		//Artikelgruppe Testen (mit fixer id 3)
+		
+		assertTrue(grpDAO.getAlleArtikelByGrp(3).size()>0);
+		
 		//Kundedao erzeugen
 		KundeDAO kdao = (KundeDAO)context.lookup("KundeDAOImpl/remote");
 		

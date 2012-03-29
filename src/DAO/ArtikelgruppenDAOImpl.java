@@ -17,10 +17,10 @@ public class ArtikelgruppenDAOImpl extends GenericDAOImpl implements
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Artikel> getAlleArtikelByGrp(Artikelgruppe grp) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Artikel> getAlleArtikelByGrp(int id) {
+		return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, id).getResultList();
 	}
 
 }

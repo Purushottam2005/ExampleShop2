@@ -3,6 +3,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class Artikelgruppe implements java.io.Serializable{
 	private int id;
 	private String bezeichnung;
 	private String info;
-	@OneToMany(mappedBy="artikelgruppe", cascade={CascadeType.ALL})
+	@OneToMany(cascade={CascadeType.ALL})
+	@JoinTable(name="ARTIKEL_ARTIKELGRUPPE")
 	private List<Artikel> artikel;
 	public int getId() {
 		return id;
@@ -58,6 +60,5 @@ public class Artikelgruppe implements java.io.Serializable{
 			artikel = new ArrayList<Artikel>();
 		}
 		artikel.add(art);
-		art.setArtikelgruppe(this);
 	}
 }
