@@ -13,9 +13,7 @@ public class Main {
 	public static void main(String[] args) throws NamingException {
 		InitialContext context = new InitialContext();
 		GenericDAO dao = (GenericDAO)context.lookup("GenericDAO/remote");
-		if (dao!=null){
-			System.out.println("test");
-		}
+
 
 	}
 

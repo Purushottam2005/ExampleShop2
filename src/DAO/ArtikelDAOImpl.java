@@ -13,13 +13,23 @@ public class ArtikelDAOImpl extends GenericDAOImpl implements ArtikelDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikel> getAll() {
-		return em.createQuery("Select a from Artikel a").getResultList();
+		try{
+			return em.createQuery("Select a from Artikel a").getResultList();			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikel> getByGrp(Artikelgruppe artikelgruppe) {
-		return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, artikelgruppe.getId()).getResultList();
+		try{
+			return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, artikelgruppe.getId()).getResultList();		
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

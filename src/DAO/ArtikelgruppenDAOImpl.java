@@ -6,6 +6,7 @@ import javax.ejb.Stateful;
 
 import classes.Artikel;
 import classes.Artikelgruppe;
+import classes.Kunde;
 import interfaces.ArtikelgruppenDAO;
 @Stateful(name="ArtikelgruppenDAOImpl")
 public class ArtikelgruppenDAOImpl extends GenericDAOImpl implements
@@ -14,13 +15,23 @@ public class ArtikelgruppenDAOImpl extends GenericDAOImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikelgruppe> getAlleArtGrp() {
-		return em.createQuery("Select a from Artikelgruppe a").getResultList();
+		try{
+			return em.createQuery("Select a from Artikelgruppe a").getResultList();			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Artikel> getAlleArtikelByGrp(int id) {
-		return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, id).getResultList();
+		try{
+			return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, id).getResultList();		
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
