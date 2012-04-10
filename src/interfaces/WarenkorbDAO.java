@@ -19,5 +19,7 @@ import classes.Kunde;
 		public int geheZurKasse();
 		
 		public void fuegeWarenkorbZuKunde(Kunde kunde);
+		
+		public boolean warenkorbExists();
 	}
 

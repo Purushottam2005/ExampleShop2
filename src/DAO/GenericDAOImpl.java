@@ -52,5 +52,9 @@ public class GenericDAOImpl implements GenericDAO {
 			em.remove(entity);
 		}
 	}
+	
+	public boolean checkEntityManager(){
+		return em != null;
+	}
 
 }

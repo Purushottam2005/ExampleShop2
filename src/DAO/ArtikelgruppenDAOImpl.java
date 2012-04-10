@@ -27,7 +27,12 @@ public class ArtikelgruppenDAOImpl extends GenericDAOImpl implements
 	@Override
 	public List<Artikel> getAlleArtikelByGrp(int id) {
 		try{
-			return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, id).getResultList();		
+			if (id!=-1){
+				return em.createQuery("Select f.artikel from Artikelgruppe f where f.id=?0").setParameter(0, id).getResultList();
+			}else{
+				return em.createQuery("Select a from Artikel a").getResultList();
+			}
+						
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

@@ -65,4 +65,9 @@ public class WarenkorbDAOImpl implements WarenkorbDAO {
 		wk = (Warenkorb)context.lookup("WarenkorbImpl/remote");		
 	}
 
+	@Override
+	public boolean warenkorbExists() {
+		return wk==null;
+	}
+
 }

@@ -1,6 +1,8 @@
 package DAO;
 
 import javax.ejb.Stateful;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import classes.Kunde;
 import interfaces.KundeDAO;
@@ -13,6 +15,10 @@ public class KundeDAOImpl extends GenericDAOImpl implements KundeDAO {
 			if (em != null){
 				return em.createQuery("Select k from Kunde k where k.email=?0 and k.password=?1").setParameter(0, email).setParameter(1, password).getResultList().size()==1;				
 			}else{
+				EntityManagerFactory emf;
+				emf = Persistence.createEntityManagerFactory("shop");
+				em = emf.createEntityManager();
+				System.out.println("Information: Entitymanager is null");
 				return false;
 			}			
 		}catch(Exception e){
