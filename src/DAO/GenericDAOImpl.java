@@ -23,7 +23,10 @@ import interfaces.GenericDAO;
 @Stateful(name="GenericDAO")
 public class GenericDAOImpl implements GenericDAO {
 	@PersistenceContext EntityManager em;
-	
+
+	public GenericDAOImpl(){
+
+	}
 	
 	@Override
 	public <T> List<T> findAll(Class<T> entityClass) {

@@ -1,6 +1,7 @@
 package DAO;
 
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -9,15 +10,20 @@ import interfaces.KundeDAO;
 @Stateful(name="KundeDAOImpl")
 public class KundeDAOImpl extends GenericDAOImpl implements KundeDAO {
 
+	public KundeDAOImpl(){
+		//super();
+	}
+	
+	public EntityManager getEm(){
+		return this.em;
+	}
+	
 	@Override
 	public boolean checkPassword(String email, String password) {
 		try{
 			if (em != null){
 				return em.createQuery("Select k from Kunde k where k.email=?0 and k.password=?1").setParameter(0, email).setParameter(1, password).getResultList().size()==1;				
 			}else{
-				EntityManagerFactory emf;
-				emf = Persistence.createEntityManagerFactory("shop");
-				em = emf.createEntityManager();
 				System.out.println("Information: Entitymanager is null");
 				return false;
 			}			
@@ -48,6 +54,12 @@ public class KundeDAOImpl extends GenericDAOImpl implements KundeDAO {
 		}
 
 		
+	}
+
+	@Override
+	public void setEm(EntityManagerFactory emf) {
+		// TODO Auto-generated method stub
+		this.em = emf.createEntityManager();
 	}
 
 }
